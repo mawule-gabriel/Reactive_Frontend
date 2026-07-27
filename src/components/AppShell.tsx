@@ -1,5 +1,7 @@
 import { Link, Outlet, useLocation } from 'react-router-dom'
 import { Building2, LayoutDashboard, LogOut, Moon, Sun, User, Users, UsersRound } from 'lucide-react'
+import { getAvatarGradient } from '@/lib/colors'
+import { cn } from '@/lib/utils'
 import { useAuth } from '@/context/AuthContext'
 import { useTheme } from '@/context/ThemeContext'
 import {
@@ -52,7 +54,9 @@ export function AppShell() {
       <Sidebar>
         <SidebarHeader>
           <div className="flex items-center gap-2 px-2 py-1.5">
-            <img src={logoMark} alt="" className="h-6 w-6" />
+            <div className="flex h-6 w-6 items-center justify-center rounded bg-gradient-to-br from-purple-500 to-indigo-500">
+              <img src={logoMark} alt="" className="h-4 w-4 brightness-0 invert" />
+            </div>
             <span className="text-body font-semibold">Reactive HR</span>
           </div>
         </SidebarHeader>
@@ -80,7 +84,7 @@ export function AppShell() {
             <DropdownMenuTrigger asChild>
               <button className="hover:bg-sidebar-accent flex w-full items-center gap-2 rounded-md p-2 text-left">
                 <Avatar className="h-7 w-7">
-                  <AvatarFallback className="text-caption">{initialsFrom(session?.email ?? '')}</AvatarFallback>
+                  <AvatarFallback className={cn("text-caption", getAvatarGradient(session?.email ?? ''))}>{initialsFrom(session?.email ?? '')}</AvatarFallback>
                 </Avatar>
                 <div className="flex-1 truncate text-body">{session?.email}</div>
               </button>

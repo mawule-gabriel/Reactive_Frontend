@@ -11,6 +11,8 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
+import { getAvatarGradient } from '@/lib/colors'
+import { cn } from '@/lib/utils'
 
 const currencyFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
 
@@ -118,8 +120,7 @@ export function ProfilePage() {
       <Card>
         <CardHeader className="flex-row items-center gap-4">
           <Avatar className="h-14 w-14">
-            <AvatarFallback className="text-card-title">
-              {initialsFrom(employee.firstName, employee.lastName)}
+            <AvatarFallback className={cn("text-card-title", getAvatarGradient(`${employee.firstName} ${employee.lastName}`))}>              {initialsFrom(employee.firstName, employee.lastName)}
             </AvatarFallback>
           </Avatar>
           <div>

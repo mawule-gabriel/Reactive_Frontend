@@ -6,6 +6,7 @@ import { employeesApi } from '@/api/employees'
 import { departmentsApi } from '@/api/departments'
 import { ApiError } from '@/api/client'
 import type { DepartmentResponse, EmployeeResponse } from '@/api/types'
+import { getDepartmentColor } from '@/lib/colors'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -35,6 +36,14 @@ const currencyFormatter = new Intl.NumberFormat('en-US', { style: 'currency', cu
 function formatHireDate(isoDate: string): string {
   const [year, month, day] = isoDate.split('-').map(Number)
   return new Date(year, month - 1, day).toLocaleDateString()
+}
+
+function isNewHire(isoDate: string): boolean {
+  const [year, month, day] = isoDate.split('-').map(Number)
+  const hireDate = new Date(year, month - 1, day)
+  const thirtyDaysAgo = new Date()
+  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
+  return hireDate >= thirtyDaysAgo
 }
 
 const ALL_DEPARTMENTS = 'all'
@@ -196,11 +205,26 @@ export function EmployeesPage() {
               filtered?.map((employee) => (
                 <TableRow key={employee.id}>
                   <TableCell className="font-medium">
-                    {employee.firstName} {employee.lastName}
+                    <div className="flex items-center gap-2">
+                      {employee.firstName} {employee.lastName}
+                      {isNewHire(employee.hireDate) && (
+                        <span className="inline-flex items-center rounded-full bg-accent/15 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent">
+                          New
+                        </span>
+                      )}
+                    </div>
                   </TableCell>
                   <TableCell className="text-foreground-muted">{employee.email}</TableCell>
                   <TableCell>{employee.jobTitle}</TableCell>
-                  <TableCell className="text-foreground-muted">{employee.departmentName ?? '—'}</TableCell>
+                  <TableCell>
+                    {employee.departmentName ? (
+                      <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-xs font-medium ${getDepartmentColor(employee.departmentName)}`}>
+                        {employee.departmentName}
+                      </span>
+                    ) : (
+                      <span className="text-foreground-muted">—</span>
+                    )}
+                  </TableCell>
                   {isAdmin && <TableCell>{currencyFormatter.format(employee.salary)}</TableCell>}
                   <TableCell className="text-foreground-muted">{formatHireDate(employee.hireDate)}</TableCell>
                   {isAdmin && (

@@ -7,6 +7,8 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { getAvatarGradient } from '@/lib/colors'
+import { cn } from '@/lib/utils'
 
 function initialsFrom(firstName: string, lastName: string): string {
   return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase()
@@ -90,7 +92,9 @@ export function ColleaguesPage() {
             <Card key={colleague.id}>
               <CardContent className="flex items-center gap-3 p-4">
                 <Avatar className="h-10 w-10">
-                  <AvatarFallback>{initialsFrom(colleague.firstName, colleague.lastName)}</AvatarFallback>
+                  <AvatarFallback className={cn(getAvatarGradient(`${colleague.firstName} ${colleague.lastName}`))}>
+                    {initialsFrom(colleague.firstName, colleague.lastName)}
+                  </AvatarFallback>
                 </Avatar>
                 <div>
                   <div className="font-medium">
