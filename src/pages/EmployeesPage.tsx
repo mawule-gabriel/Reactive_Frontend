@@ -165,7 +165,7 @@ export function EmployeesPage() {
               <TableHead>Email</TableHead>
               <TableHead>Job Title</TableHead>
               <TableHead>Department</TableHead>
-              <TableHead>Salary</TableHead>
+              {isAdmin && <TableHead>Salary</TableHead>}
               <TableHead>Hire Date</TableHead>
               {isAdmin && <TableHead className="w-12" />}
             </TableRow>
@@ -174,7 +174,7 @@ export function EmployeesPage() {
             {isLoading &&
               Array.from({ length: 4 }).map((_, index) => (
                 <TableRow key={index}>
-                  {Array.from({ length: isAdmin ? 7 : 6 }).map((__, cellIndex) => (
+                  {Array.from({ length: isAdmin ? 7 : 5 }).map((__, cellIndex) => (
                     <TableCell key={cellIndex}>
                       <Skeleton className="h-4 w-full max-w-32" />
                     </TableCell>
@@ -184,7 +184,7 @@ export function EmployeesPage() {
 
             {!isLoading && filtered?.length === 0 && (
               <TableRow>
-                <TableCell colSpan={isAdmin ? 7 : 6} className="text-foreground-muted h-24 text-center">
+                <TableCell colSpan={isAdmin ? 7 : 5} className="text-foreground-muted h-24 text-center">
                   {search || departmentFilter !== ALL_DEPARTMENTS
                     ? 'No employees match your filters.'
                     : 'No employees yet.'}
@@ -201,7 +201,7 @@ export function EmployeesPage() {
                   <TableCell className="text-foreground-muted">{employee.email}</TableCell>
                   <TableCell>{employee.jobTitle}</TableCell>
                   <TableCell className="text-foreground-muted">{employee.departmentName ?? '—'}</TableCell>
-                  <TableCell>{currencyFormatter.format(employee.salary)}</TableCell>
+                  {isAdmin && <TableCell>{currencyFormatter.format(employee.salary)}</TableCell>}
                   <TableCell className="text-foreground-muted">{formatHireDate(employee.hireDate)}</TableCell>
                   {isAdmin && (
                     <TableCell>

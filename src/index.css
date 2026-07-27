@@ -14,8 +14,8 @@
 
   /* Core Colors */
   --background: #ffffff;
-  --surface: #f9fafb;
-  --surface-elevated: #ffffff;
+  --surface: #f7f7f8;
+  --surface-elevated: #eeeeef;
   
   /* Text */
   --foreground: #090909;
@@ -63,13 +63,16 @@
   --radius-sm: 8px;
   --radius-md: 12px;
   --radius-lg: 16px;
+
+  /* Shadows */
+  --shadow-elevated: 0 8px 24px rgba(0,0,0,0.15);
 }
 
 .dark {
   /* Core Colors */
-  --background: #090909;
+  --background: #0a0a0a;
   --surface: #141414;
-  --surface-elevated: #1C1C1C;
+  --surface-elevated: #1c1c1c;
   
   /* Text */
   --foreground: #FFFFFF;
@@ -77,7 +80,7 @@
   --foreground-muted: rgba(255, 255, 255, 0.50);
 
   /* Accent & Borders */
-  --border: rgba(255, 255, 255, 0.06);
+  --border: rgba(255, 255, 255, 0.08);
   --accent: #8B5CF6;
   --accent-foreground: #ffffff;
 
@@ -105,6 +108,9 @@
   --sidebar-accent-foreground: var(--secondary-foreground);
   --sidebar-border: var(--border);
   --sidebar-ring: var(--ring);
+
+  /* Shadows */
+  --shadow-elevated: 0 8px 24px rgba(0,0,0,0.4);
 }
 
 @theme inline {
@@ -168,6 +174,9 @@
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
   --radius-lg: var(--radius-lg);
+
+  /* Shadows */
+  --shadow-elevated: var(--shadow-elevated);
 }
 
 @layer base {
