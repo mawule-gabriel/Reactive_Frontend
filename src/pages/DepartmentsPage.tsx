@@ -96,7 +96,9 @@ export function DepartmentsPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-page-title font-semibold tracking-tight">Departments</h1>
-          <p className="text-foreground-muted text-body">Manage your organization's departments.</p>
+          <p className="text-foreground-muted text-body">
+            {isAdmin ? "Manage your organization's departments." : "View the organizational structure."}
+          </p>
         </div>
         {isAdmin && (
           <Button onClick={openCreateDialog}>
@@ -123,7 +125,7 @@ export function DepartmentsPage() {
         />
       </div>
 
-      <div className="rounded-md border">
+      <div className="rounded-xl border bg-surface overflow-hidden shadow-sm">
         <Table>
           <TableHeader>
             <TableRow>

@@ -126,7 +126,9 @@ export function EmployeesPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-page-title font-semibold tracking-tight">Employees</h1>
-          <p className="text-foreground-muted text-body">Manage your organization's staff records.</p>
+          <p className="text-foreground-muted text-body">
+            {isAdmin ? "Manage your organization's staff records." : "View the staff directory."}
+          </p>
         </div>
         {isAdmin && (
           <Button onClick={openCreateDialog} disabled={departments.length === 0}>
@@ -168,7 +170,7 @@ export function EmployeesPage() {
         </Select>
       </div>
 
-      <div className="rounded-md border">
+      <div className="rounded-xl border bg-surface overflow-hidden shadow-sm">
         <Table>
           <TableHeader>
             <TableRow>

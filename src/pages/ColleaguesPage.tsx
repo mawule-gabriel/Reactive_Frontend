@@ -93,18 +93,21 @@ export function ColleaguesPage() {
       {colleagues !== null && colleagues.length > 0 && (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {colleagues.map((colleague) => (
-            <Card key={colleague.id}>
-              <CardContent className="flex items-center gap-3 p-4">
-                <Avatar className="h-10 w-10">
-                  <AvatarFallback className={cn(getAvatarGradient(`${colleague.firstName} ${colleague.lastName}`))}>
+            <Card key={colleague.id} className="overflow-hidden group hover:shadow-elevated hover:bg-surface-elevated transition-all duration-200">
+              <div className="h-16 w-full bg-muted/30 border-b border-border/50" />
+              <CardContent className="p-5 pt-0 relative flex flex-col items-center text-center">
+                <Avatar className="h-16 w-16 border-4 border-card bg-card shadow-sm absolute -top-8 transition-transform duration-200 group-hover:scale-105">
+                  <AvatarFallback className={cn("text-card-title", getAvatarGradient(`${colleague.firstName} ${colleague.lastName}`))}>
                     {initialsFrom(colleague.firstName, colleague.lastName)}
                   </AvatarFallback>
                 </Avatar>
-                <div>
-                  <div className="font-medium">
+                <div className="mt-10 w-full">
+                  <div className="font-semibold text-card-title truncate">
                     {colleague.firstName} {colleague.lastName}
                   </div>
-                  <div className="text-foreground-muted text-body">{colleague.jobTitle}</div>
+                  <div className="text-foreground-muted text-body truncate mt-0.5">
+                    {colleague.jobTitle}
+                  </div>
                 </div>
               </CardContent>
             </Card>
