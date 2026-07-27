@@ -34,8 +34,8 @@ const NAV_ITEMS = [
   { to: '/', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/departments', label: 'Departments', icon: Building2 },
   { to: '/employees', label: 'Employees', icon: Users },
-  { to: '/profile', label: 'My Profile', icon: User },
-  { to: '/colleagues', label: 'My Colleagues', icon: UsersRound },
+  { to: '/profile', label: 'My Profile', icon: User, employeeOnly: true },
+  { to: '/colleagues', label: 'My Colleagues', icon: UsersRound, employeeOnly: true },
 ]
 
 function initialsFrom(email: string): string {
@@ -61,7 +61,7 @@ export function AppShell() {
             <SidebarGroupLabel>Workspace</SidebarGroupLabel>
             <SidebarGroupContent>
               <SidebarMenu>
-                {NAV_ITEMS.map((item) => (
+                {NAV_ITEMS.filter((item) => !item.employeeOnly || !isAdmin).map((item) => (
                   <SidebarMenuItem key={item.to}>
                     <SidebarMenuButton asChild isActive={location.pathname === item.to}>
                       <Link to={item.to}>
