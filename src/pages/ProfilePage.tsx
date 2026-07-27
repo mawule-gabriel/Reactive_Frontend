@@ -12,7 +12,7 @@ import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { getAvatarGradient } from '@/lib/colors'
+import { getAvatarGradient, getBannerGradient } from '@/lib/colors'
 import { cn } from '@/lib/utils'
 
 const currencyFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
@@ -119,20 +119,21 @@ export function ProfilePage() {
         <p className="text-foreground-muted text-body">View and update your personal details.</p>
       </div>
 
-      <Card>
-        <CardHeader className="flex-row items-center gap-4">
-          <Avatar className="h-14 w-14">
-            <AvatarFallback className={cn("text-card-title", getAvatarGradient(`${employee.firstName} ${employee.lastName}`))}>              {initialsFrom(employee.firstName, employee.lastName)}
+      <Card className="overflow-hidden ring-1 ring-white/5 shadow-sm">
+        <div className={cn("h-24 w-full border-b border-border/50", getBannerGradient(`${employee.firstName} ${employee.lastName}`))} />
+        <CardHeader className="flex-row items-center gap-4 relative pt-0">
+          <Avatar className="h-20 w-20 border-4 border-card bg-card shadow-sm absolute -top-10">
+            <AvatarFallback className={cn("text-card-title text-xl", getAvatarGradient(`${employee.firstName} ${employee.lastName}`))}>              {initialsFrom(employee.firstName, employee.lastName)}
             </AvatarFallback>
           </Avatar>
-          <div>
-            <CardTitle>
+          <div className="mt-12 w-full">
+            <CardTitle className="text-xl">
               {employee.firstName} {employee.lastName}
             </CardTitle>
-            <CardDescription>{employee.jobTitle}</CardDescription>
+            <CardDescription className="text-sm mt-1">{employee.jobTitle}</CardDescription>
           </div>
         </CardHeader>
-        <CardContent className="grid grid-cols-1 gap-4 border-t pt-4 text-body sm:grid-cols-3">
+        <CardContent className="grid grid-cols-1 gap-6 border-t pt-6 text-body sm:grid-cols-3">
           <div>
             <div className="text-foreground-muted">Department</div>
             <div className="font-medium">{employee.departmentName ?? '—'}</div>

@@ -8,7 +8,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Avatar, AvatarFallback } from '@/components/ui/avatar'
-import { getAvatarGradient } from '@/lib/colors'
+import { getAvatarGradient, getBannerGradient } from '@/lib/colors'
 import { cn } from '@/lib/utils'
 
 function initialsFrom(firstName: string, lastName: string): string {
@@ -93,8 +93,8 @@ export function ColleaguesPage() {
       {colleagues !== null && colleagues.length > 0 && (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {colleagues.map((colleague) => (
-            <Card key={colleague.id} className="overflow-hidden group hover:shadow-elevated hover:bg-surface-elevated transition-all duration-200">
-              <div className="h-16 w-full bg-muted/30 border-b border-border/50" />
+            <Card key={colleague.id} className="overflow-hidden group hover:shadow-elevated hover:bg-surface-elevated transition-all duration-300 ring-1 ring-white/5">
+              <div className={cn("h-16 w-full border-b border-border/50", getBannerGradient(`${colleague.firstName} ${colleague.lastName}`))} />
               <CardContent className="p-5 pt-0 relative flex flex-col items-center text-center">
                 <Avatar className="h-16 w-16 border-4 border-card bg-card shadow-sm absolute -top-8 transition-transform duration-200 group-hover:scale-105">
                   <AvatarFallback className={cn("text-card-title", getAvatarGradient(`${colleague.firstName} ${colleague.lastName}`))}>

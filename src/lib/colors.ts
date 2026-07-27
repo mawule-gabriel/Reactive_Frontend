@@ -10,12 +10,25 @@ const DEPARTMENT_COLORS = [
 ]
 
 const AVATAR_GRADIENTS = [
-  'bg-gradient-to-br from-blue-500 to-indigo-500 text-white',
-  'bg-gradient-to-br from-emerald-500 to-cyan-600 text-white',
-  'bg-gradient-to-br from-amber-500 to-orange-600 text-white',
-  'bg-gradient-to-br from-pink-500 to-rose-600 text-white',
-  'bg-gradient-to-br from-purple-500 to-fuchsia-600 text-white',
-  'bg-gradient-to-br from-indigo-400 to-cyan-500 text-white',
+  'bg-gradient-to-br from-orange-500 to-rose-500 text-white',
+  'bg-gradient-to-br from-emerald-500 to-sky-500 text-white',
+  'bg-gradient-to-br from-violet-500 to-indigo-500 text-white',
+  'bg-gradient-to-br from-amber-500 to-orange-500 text-white',
+  'bg-gradient-to-br from-cyan-500 to-blue-500 text-white',
+  'bg-gradient-to-br from-pink-500 to-violet-500 text-white',
+  'bg-gradient-to-br from-lime-500 to-emerald-500 text-white',
+  'bg-gradient-to-br from-slate-500 to-slate-700 text-white',
+]
+
+const BANNER_GRADIENTS = [
+  'bg-gradient-to-r from-orange-500/20 to-rose-500/20',
+  'bg-gradient-to-r from-emerald-500/20 to-sky-500/20',
+  'bg-gradient-to-r from-violet-500/20 to-indigo-500/20',
+  'bg-gradient-to-r from-amber-500/20 to-orange-500/20',
+  'bg-gradient-to-r from-cyan-500/20 to-blue-500/20',
+  'bg-gradient-to-r from-pink-500/20 to-violet-500/20',
+  'bg-gradient-to-r from-lime-500/20 to-emerald-500/20',
+  'bg-gradient-to-r from-slate-500/20 to-slate-700/20',
 ]
 
 function hashString(str: string): number {
@@ -36,4 +49,10 @@ export function getAvatarGradient(identifier: string): string {
   if (!identifier) return 'bg-gray-200 text-gray-600 dark:bg-gray-700 dark:text-gray-300'
   const index = hashString(identifier) % AVATAR_GRADIENTS.length
   return AVATAR_GRADIENTS[index]
+}
+
+export function getBannerGradient(identifier: string): string {
+  if (!identifier) return 'bg-gray-200/20 dark:bg-gray-700/20'
+  const index = hashString(identifier) % BANNER_GRADIENTS.length
+  return BANNER_GRADIENTS[index]
 }

@@ -7,11 +7,13 @@ import { employeesApi } from '@/api/employees'
 import { departmentsApi } from '@/api/departments'
 import { ApiError } from '@/api/client'
 import type { DepartmentResponse, EmployeeResponse } from '@/api/types'
-import { getDepartmentColor } from '@/lib/colors'
+import { getDepartmentColor, getAvatarGradient } from '@/lib/colors'
+import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Skeleton } from '@/components/ui/skeleton'
 import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import {
@@ -45,6 +47,10 @@ function isNewHire(isoDate: string): boolean {
   const thirtyDaysAgo = new Date()
   thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30)
   return hireDate >= thirtyDaysAgo
+}
+
+function initialsFrom(firstName: string, lastName: string): string {
+  return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase()
 }
 
 const ALL_DEPARTMENTS = 'all'
@@ -209,13 +215,20 @@ export function EmployeesPage() {
               filtered?.map((employee) => (
                 <TableRow key={employee.id}>
                   <TableCell className="font-medium">
-                    <div className="flex items-center gap-2">
-                      {employee.firstName} {employee.lastName}
-                      {isNewHire(employee.hireDate) && (
-                        <span className="inline-flex items-center rounded-full bg-accent/15 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent">
-                          New
-                        </span>
-                      )}
+                    <div className="flex items-center gap-3">
+                      <Avatar className="h-8 w-8">
+                        <AvatarFallback className={cn("text-xs", getAvatarGradient(`${employee.firstName} ${employee.lastName}`))}>
+                          {initialsFrom(employee.firstName, employee.lastName)}
+                        </AvatarFallback>
+                      </Avatar>
+                      <div className="flex items-center gap-2">
+                        {employee.firstName} {employee.lastName}
+                        {isNewHire(employee.hireDate) && (
+                          <span className="inline-flex items-center rounded-full bg-accent/15 px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-accent">
+                            New
+                          </span>
+                        )}
+                      </div>
                     </div>
                   </TableCell>
                   <TableCell className="text-foreground-muted">{employee.email}</TableCell>

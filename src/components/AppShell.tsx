@@ -114,7 +114,12 @@ export function AppShell() {
           <SidebarTrigger />
           <Separator orientation="vertical" className="h-4" />
         </header>
-        <div className="flex-1 overflow-auto animate-in fade-in duration-500">
+        <div className="flex-1 overflow-auto animate-in fade-in duration-500 relative isolate">
+          {/* Ambient glassmorphism background glow */}
+          <div className="fixed inset-0 -z-10 pointer-events-none">
+            <div className="absolute top-[-20%] left-[-10%] w-[50vw] h-[50vw] rounded-full bg-purple-500/5 blur-[120px]" />
+            <div className="absolute bottom-[-20%] right-[-10%] w-[40vw] h-[40vw] rounded-full bg-indigo-500/5 blur-[120px]" />
+          </div>
           <Outlet />
         </div>
       </SidebarInset>
