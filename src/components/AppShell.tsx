@@ -110,7 +110,7 @@ export function AppShell() {
           <SidebarTrigger />
           <Separator orientation="vertical" className="h-4" />
         </header>
-        <div className="flex-1 overflow-auto">
+        <div className="flex-1 overflow-auto animate-in fade-in duration-500">
           <Outlet />
         </div>
       </SidebarInset>
