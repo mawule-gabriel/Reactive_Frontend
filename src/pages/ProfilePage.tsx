@@ -1,0 +1,200 @@
+import { useEffect, useState, type FormEvent } from 'react'
+import { toast } from 'sonner'
+import { AlertCircle, Loader2, UserX } from 'lucide-react'
+import { employeesApi } from '@/api/employees'
+import { ApiError } from '@/api/client'
+import type { EmployeeResponse } from '@/api/types'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Skeleton } from '@/components/ui/skeleton'
+import { Alert, AlertDescription } from '@/components/ui/alert'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+
+const currencyFormatter = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' })
+
+function formatHireDate(isoDate: string): string {
+  const [year, month, day] = isoDate.split('-').map(Number)
+  return new Date(year, month - 1, day).toLocaleDateString()
+}
+
+function initialsFrom(firstName: string, lastName: string): string {
+  return `${firstName.charAt(0)}${lastName.charAt(0)}`.toUpperCase()
+}
+
+export function ProfilePage() {
+  const [employee, setEmployee] = useState<EmployeeResponse | null>(null)
+  const [notLinked, setNotLinked] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [isLoading, setIsLoading] = useState(true)
+
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [email, setEmail] = useState('')
+  const [formError, setFormError] = useState<string | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  useEffect(() => {
+    employeesApi
+      .me()
+      .then((data) => {
+        setEmployee(data)
+        setFirstName(data.firstName)
+        setLastName(data.lastName)
+        setEmail(data.email)
+      })
+      .catch((err) => {
+        if (err instanceof ApiError && err.status === 404) {
+          setNotLinked(true)
+        } else {
+          setError(err instanceof ApiError ? err.message : 'Failed to load your profile.')
+        }
+      })
+      .finally(() => setIsLoading(false))
+  }, [])
+
+  async function handleSubmit(event: FormEvent) {
+    event.preventDefault()
+    setFormError(null)
+    setIsSubmitting(true)
+    try {
+      const updated = await employeesApi.updateMe({ firstName, lastName, email })
+      setEmployee(updated)
+      toast.success('Profile updated')
+    } catch (err) {
+      setFormError(err instanceof ApiError ? err.message : 'Something went wrong. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  if (isLoading) {
+    return (
+      <div className="max-w-2xl space-y-6 p-6">
+        <Skeleton className="h-8 w-48" />
+        <Skeleton className="h-64 w-full" />
+      </div>
+    )
+  }
+
+  if (notLinked) {
+    return (
+      <div className="p-6">
+        <h1 className="mb-6 text-2xl font-semibold tracking-tight">My Profile</h1>
+        <Card>
+          <CardContent className="flex flex-col items-center gap-3 py-12 text-center">
+            <UserX className="text-muted-foreground h-10 w-10" />
+            <p className="font-medium">No employee record linked to your account</p>
+            <p className="text-muted-foreground max-w-sm text-sm">
+              Ask your administrator to add you as an employee using this account's email address.
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
+
+  if (error) {
+    return (
+      <div className="p-6">
+        <Alert variant="destructive">
+          <AlertCircle />
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      </div>
+    )
+  }
+
+  if (!employee) return null
+
+  return (
+    <div className="max-w-2xl space-y-6 p-6">
+      <div>
+        <h1 className="text-2xl font-semibold tracking-tight">My Profile</h1>
+        <p className="text-muted-foreground text-sm">View and update your personal details.</p>
+      </div>
+
+      <Card>
+        <CardHeader className="flex-row items-center gap-4">
+          <Avatar className="h-14 w-14">
+            <AvatarFallback className="text-lg">
+              {initialsFrom(employee.firstName, employee.lastName)}
+            </AvatarFallback>
+          </Avatar>
+          <div>
+            <CardTitle>
+              {employee.firstName} {employee.lastName}
+            </CardTitle>
+            <CardDescription>{employee.jobTitle}</CardDescription>
+          </div>
+        </CardHeader>
+        <CardContent className="grid grid-cols-1 gap-4 border-t pt-4 text-sm sm:grid-cols-3">
+          <div>
+            <div className="text-muted-foreground">Department</div>
+            <div className="font-medium">{employee.departmentName ?? '—'}</div>
+          </div>
+          <div>
+            <div className="text-muted-foreground">Salary</div>
+            <div className="font-medium">{currencyFormatter.format(employee.salary)}</div>
+          </div>
+          <div>
+            <div className="text-muted-foreground">Hire date</div>
+            <div className="font-medium">{formatHireDate(employee.hireDate)}</div>
+          </div>
+        </CardContent>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-base">Edit details</CardTitle>
+          <CardDescription>Only your name and email can be changed here.</CardDescription>
+        </CardHeader>
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            {formError && (
+              <Alert variant="destructive">
+                <AlertCircle />
+                <AlertDescription>{formError}</AlertDescription>
+              </Alert>
+            )}
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="profile-first-name">First name</Label>
+                <Input
+                  id="profile-first-name"
+                  required
+                  value={firstName}
+                  onChange={(event) => setFirstName(event.target.value)}
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="profile-last-name">Last name</Label>
+                <Input
+                  id="profile-last-name"
+                  required
+                  value={lastName}
+                  onChange={(event) => setLastName(event.target.value)}
+                />
+              </div>
+            </div>
+            <div className="space-y-2">
+              <Label htmlFor="profile-email">Email</Label>
+              <Input
+                id="profile-email"
+                type="email"
+                required
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+              />
+            </div>
+            <Button type="submit" disabled={isSubmitting}>
+              {isSubmitting && <Loader2 className="animate-spin" />}
+              Save changes
+            </Button>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}
