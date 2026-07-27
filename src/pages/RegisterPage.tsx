@@ -42,7 +42,7 @@ export function RegisterPage() {
         </p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-6">
         {error && (
           <Alert variant="destructive">
             <AlertCircle />
@@ -85,7 +85,7 @@ export function RegisterPage() {
         </Button>
       </form>
 
-      <p className="text-foreground-muted mt-6 text-center text-body">
+      <p className="text-foreground-muted mt-8 text-center text-body">
         Already have an account?{' '}
         <Link to="/login" className="text-foreground font-medium underline-offset-4 hover:underline">
           Sign in

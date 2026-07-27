@@ -90,7 +90,7 @@ export function DepartmentsPage() {
   const isLoading = departments === null
 
   return (
-    <div className="space-y-6 p-6">
+    <div className="space-y-8 p-4 md:p-8">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-page-title font-semibold tracking-tight">Departments</h1>

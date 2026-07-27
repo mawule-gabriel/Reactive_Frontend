@@ -111,7 +111,7 @@ export function EmployeesPage() {
   const isLoading = employees === null
 
   return (
-    <div className="space-y-6 p-6">
+    <div className="space-y-8 p-4 md:p-8">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-page-title font-semibold tracking-tight">Employees</h1>
@@ -132,7 +132,7 @@ export function EmployeesPage() {
         </Alert>
       )}
 
-      <div className="flex flex-wrap items-center gap-2">
+      <div className="flex flex-wrap items-center gap-4">
         <div className="relative max-w-sm flex-1">
           <Search className="text-foreground-muted absolute top-2.5 left-2.5 h-4 w-4" />
           <Input

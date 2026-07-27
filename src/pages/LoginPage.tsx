@@ -40,7 +40,7 @@ export function LoginPage() {
         <p className="text-foreground-muted text-body">Sign in to your Reactive HR account</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-6">
         {error && (
           <Alert variant="destructive">
             <AlertCircle />
@@ -78,7 +78,7 @@ export function LoginPage() {
         </Button>
       </form>
 
-      <p className="text-foreground-muted mt-6 text-center text-body">
+      <p className="text-foreground-muted mt-8 text-center text-body">
         Don't have an account?{' '}
         <Link to="/register" className="text-foreground font-medium underline-offset-4 hover:underline">
           Register

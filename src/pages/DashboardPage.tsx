@@ -38,7 +38,7 @@ export function DashboardPage() {
   const maxHeadcount = Math.max(...(headcountByDepartment?.map((entry) => entry.count) ?? [1]), 1)
 
   return (
-    <div className="space-y-6 p-6">
+    <div className="space-y-8 p-4 md:p-8">
       <div>
         <h1 className="text-page-title font-semibold tracking-tight">Dashboard</h1>
         <p className="text-foreground-muted text-body">An overview of your organization.</p>
@@ -51,7 +51,7 @@ export function DashboardPage() {
         </Alert>
       )}
 
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid gap-6 sm:grid-cols-2">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
             <CardTitle className="text-card-title font-medium">Total Employees</CardTitle>
@@ -85,7 +85,7 @@ export function DashboardPage() {
         <CardHeader>
           <CardTitle className="text-card-title font-medium">Headcount by department</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-3">
+        <CardContent className="space-y-4">
           {isLoading && (
             <>
               <Skeleton className="h-5 w-full" />

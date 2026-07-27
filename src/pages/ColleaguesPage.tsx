@@ -31,7 +31,7 @@ export function ColleaguesPage() {
   }, [])
 
   return (
-    <div className="space-y-6 p-6">
+    <div className="space-y-8 p-4 md:p-8">
       <div>
         <h1 className="text-page-title font-semibold tracking-tight">My Colleagues</h1>
         <p className="text-foreground-muted text-body">People in your department.</p>
@@ -57,7 +57,7 @@ export function ColleaguesPage() {
       )}
 
       {!notLinked && !error && colleagues === null && (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 3 }).map((_, index) => (
             <Card key={index}>
               <CardContent className="flex items-center gap-3 p-4">
@@ -85,7 +85,7 @@ export function ColleaguesPage() {
       )}
 
       {colleagues !== null && colleagues.length > 0 && (
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {colleagues.map((colleague) => (
             <Card key={colleague.id}>
               <CardContent className="flex items-center gap-3 p-4">
