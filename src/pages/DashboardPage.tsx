@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { AlertCircle, Building2, Users } from 'lucide-react'
+import { useDelayedLoading } from '@/hooks/useDelayedLoading'
 import { departmentsApi } from '@/api/departments'
 import { employeesApi } from '@/api/employees'
 import { ApiError } from '@/api/client'
@@ -127,7 +128,8 @@ export function DashboardPage() {
     return () => { cancelled = true }
   }, [])
 
-  const isLoading = departments === null || employees === null
+  const isDataLoading = departments === null || employees === null
+  const isLoading = useDelayedLoading(isDataLoading)
 
   const headcountByDepartment = departments?.map((department) => ({
     name: department.name,

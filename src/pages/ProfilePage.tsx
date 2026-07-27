@@ -1,6 +1,7 @@
 import { useEffect, useState, type FormEvent } from 'react'
 import { toast } from 'sonner'
 import { AlertCircle, Loader2, UserX } from 'lucide-react'
+import { useDelayedLoading } from '@/hooks/useDelayedLoading'
 import { employeesApi } from '@/api/employees'
 import { ApiError } from '@/api/client'
 import type { EmployeeResponse } from '@/api/types'
@@ -29,7 +30,8 @@ export function ProfilePage() {
   const [employee, setEmployee] = useState<EmployeeResponse | null>(null)
   const [notLinked, setNotLinked] = useState(false)
   const [error, setError] = useState<string | null>(null)
-  const [isLoading, setIsLoading] = useState(true)
+  const [isDataLoading, setIsDataLoading] = useState(true)
+  const isLoading = useDelayedLoading(isDataLoading)
 
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
@@ -53,7 +55,7 @@ export function ProfilePage() {
           setError(err instanceof ApiError ? err.message : 'Failed to load your profile.')
         }
       })
-      .finally(() => setIsLoading(false))
+      .finally(() => setIsDataLoading(false))
   }, [])
 
   async function handleSubmit(event: FormEvent) {

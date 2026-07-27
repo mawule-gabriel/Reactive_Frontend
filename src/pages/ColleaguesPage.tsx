@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { AlertCircle, UserX, Users } from 'lucide-react'
+import { useDelayedLoading } from '@/hooks/useDelayedLoading'
 import { employeesApi } from '@/api/employees'
 import { ApiError } from '@/api/client'
 import type { EmployeeSummaryResponse } from '@/api/types'
@@ -32,6 +33,9 @@ export function ColleaguesPage() {
       })
   }, [])
 
+  const isDataLoading = colleagues === null
+  const isLoading = useDelayedLoading(isDataLoading)
+
   return (
     <div className="space-y-8 p-4 md:p-8">
       <div>
@@ -58,7 +62,7 @@ export function ColleaguesPage() {
         </Card>
       )}
 
-      {!notLinked && !error && colleagues === null && (
+      {!notLinked && !error && isLoading && (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {Array.from({ length: 3 }).map((_, index) => (
             <Card key={index}>

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { toast } from 'sonner'
 import { AlertCircle, MoreHorizontal, Plus, Search } from 'lucide-react'
+import { useDelayedLoading } from '@/hooks/useDelayedLoading'
 import { useAuth } from '@/context/AuthContext'
 import { employeesApi } from '@/api/employees'
 import { departmentsApi } from '@/api/departments'
@@ -117,7 +118,8 @@ export function EmployeesPage() {
     }
   }
 
-  const isLoading = employees === null
+  const isDataLoading = employees === null
+  const isLoading = useDelayedLoading(isDataLoading)
 
   return (
     <div className="space-y-8 p-4 md:p-8">
