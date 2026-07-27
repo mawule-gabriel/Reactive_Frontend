@@ -163,12 +163,15 @@
   --color-chart-1: var(--chart-1);
 
   /* Typography Scale */
-  --text-page-title: 40px;
-  --text-section-title: 24px;
-  --text-card-title: 16px;
+  --text-page-title: 32px;
+  --text-section-title: 20px;
+  --text-card-title: 18px;
   --text-body: 14px;
-  --text-caption: 12px;
-  --text-metrics: 48px;
+  --text-caption: 13px;
+  --text-metrics: 40px;
+
+  /* Font weight helpers (used in @layer base below) */
+  --font-weight-display: 700;
 
   /* Border Radii */
   --radius-sm: var(--radius-sm);
@@ -184,9 +187,18 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground leading-relaxed;
   }
   html {
     @apply font-sans;
   }
+  .text-page-title {
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+  }
+  .text-metrics {
+    letter-spacing: -0.03em;
+    line-height: 1;
+  }
 }
+
