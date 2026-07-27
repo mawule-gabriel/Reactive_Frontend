@@ -53,7 +53,7 @@ export function AppShell() {
         <SidebarHeader>
           <div className="flex items-center gap-2 px-2 py-1.5">
             <img src={logoMark} alt="" className="h-6 w-6" />
-            <span className="text-sm font-semibold">Reactive HR</span>
+            <span className="text-body font-semibold">Reactive HR</span>
           </div>
         </SidebarHeader>
         <SidebarContent>
@@ -80,15 +80,15 @@ export function AppShell() {
             <DropdownMenuTrigger asChild>
               <button className="hover:bg-sidebar-accent flex w-full items-center gap-2 rounded-md p-2 text-left">
                 <Avatar className="h-7 w-7">
-                  <AvatarFallback className="text-xs">{initialsFrom(session?.email ?? '')}</AvatarFallback>
+                  <AvatarFallback className="text-caption">{initialsFrom(session?.email ?? '')}</AvatarFallback>
                 </Avatar>
-                <div className="flex-1 truncate text-sm">{session?.email}</div>
+                <div className="flex-1 truncate text-body">{session?.email}</div>
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="start" className="w-56">
               <DropdownMenuLabel className="flex flex-col gap-1">
-                <span className="truncate text-sm font-medium">{session?.email}</span>
-                <Badge variant="secondary" className="w-fit text-xs">
+                <span className="truncate text-body font-medium">{session?.email}</span>
+                <Badge variant="secondary" className="w-fit text-caption">
                   {isAdmin ? 'Admin' : 'Employee'}
                 </Badge>
               </DropdownMenuLabel>

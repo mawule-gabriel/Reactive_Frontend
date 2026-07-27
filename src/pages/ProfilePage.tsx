@@ -81,12 +81,12 @@ export function ProfilePage() {
   if (notLinked) {
     return (
       <div className="p-6">
-        <h1 className="mb-6 text-2xl font-semibold tracking-tight">My Profile</h1>
+        <h1 className="mb-6 text-page-title font-semibold tracking-tight">My Profile</h1>
         <Card>
           <CardContent className="flex flex-col items-center gap-3 py-12 text-center">
-            <UserX className="text-muted-foreground h-10 w-10" />
+            <UserX className="text-foreground-muted h-10 w-10" />
             <p className="font-medium">No employee record linked to your account</p>
-            <p className="text-muted-foreground max-w-sm text-sm">
+            <p className="text-foreground-muted max-w-sm text-body">
               Ask your administrator to add you as an employee using this account's email address.
             </p>
           </CardContent>
@@ -111,14 +111,14 @@ export function ProfilePage() {
   return (
     <div className="max-w-2xl space-y-6 p-6">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">My Profile</h1>
-        <p className="text-muted-foreground text-sm">View and update your personal details.</p>
+        <h1 className="text-page-title font-semibold tracking-tight">My Profile</h1>
+        <p className="text-foreground-muted text-body">View and update your personal details.</p>
       </div>
 
       <Card>
         <CardHeader className="flex-row items-center gap-4">
           <Avatar className="h-14 w-14">
-            <AvatarFallback className="text-lg">
+            <AvatarFallback className="text-card-title">
               {initialsFrom(employee.firstName, employee.lastName)}
             </AvatarFallback>
           </Avatar>
@@ -129,17 +129,17 @@ export function ProfilePage() {
             <CardDescription>{employee.jobTitle}</CardDescription>
           </div>
         </CardHeader>
-        <CardContent className="grid grid-cols-1 gap-4 border-t pt-4 text-sm sm:grid-cols-3">
+        <CardContent className="grid grid-cols-1 gap-4 border-t pt-4 text-body sm:grid-cols-3">
           <div>
-            <div className="text-muted-foreground">Department</div>
+            <div className="text-foreground-muted">Department</div>
             <div className="font-medium">{employee.departmentName ?? '—'}</div>
           </div>
           <div>
-            <div className="text-muted-foreground">Salary</div>
+            <div className="text-foreground-muted">Salary</div>
             <div className="font-medium">{currencyFormatter.format(employee.salary)}</div>
           </div>
           <div>
-            <div className="text-muted-foreground">Hire date</div>
+            <div className="text-foreground-muted">Hire date</div>
             <div className="font-medium">{formatHireDate(employee.hireDate)}</div>
           </div>
         </CardContent>
@@ -147,7 +147,7 @@ export function ProfilePage() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-base">Edit details</CardTitle>
+          <CardTitle className="text-card-title">Edit details</CardTitle>
           <CardDescription>Only your name and email can be changed here.</CardDescription>
         </CardHeader>
         <CardContent>

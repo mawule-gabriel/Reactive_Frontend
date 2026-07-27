@@ -36,8 +36,8 @@ export function LoginPage() {
   return (
     <AuthLayout>
       <div className="mb-8 space-y-1">
-        <h1 className="text-2xl font-semibold tracking-tight">Welcome back</h1>
-        <p className="text-muted-foreground text-sm">Sign in to your Reactive HR account</p>
+        <h1 className="text-section-title font-semibold tracking-tight">Welcome back</h1>
+        <p className="text-foreground-muted text-body">Sign in to your Reactive HR account</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -78,7 +78,7 @@ export function LoginPage() {
         </Button>
       </form>
 
-      <p className="text-muted-foreground mt-6 text-center text-sm">
+      <p className="text-foreground-muted mt-6 text-center text-body">
         Don't have an account?{' '}
         <Link to="/register" className="text-foreground font-medium underline-offset-4 hover:underline">
           Register

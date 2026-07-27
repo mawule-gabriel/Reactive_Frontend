@@ -15,9 +15,9 @@ export function AuthLayout({ children }: AuthLayoutProps) {
         <div className="relative z-10 flex h-full flex-col justify-between p-10 text-white">
           <div className="flex items-center gap-2">
             <img src={logoMark} alt="" className="h-8 w-8" />
-            <span className="text-lg font-semibold">Reactive HR</span>
+            <span className="text-card-title font-semibold">Reactive HR</span>
           </div>
-          <blockquote className="max-w-md text-2xl leading-snug font-medium">
+          <blockquote className="max-w-md text-section-title leading-snug font-medium">
             Every department, every hire, one place — built for teams that move fast.
           </blockquote>
         </div>

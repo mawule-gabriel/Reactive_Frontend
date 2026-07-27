@@ -40,8 +40,8 @@ export function DashboardPage() {
   return (
     <div className="space-y-6 p-6">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Dashboard</h1>
-        <p className="text-muted-foreground text-sm">An overview of your organization.</p>
+        <h1 className="text-page-title font-semibold tracking-tight">Dashboard</h1>
+        <p className="text-foreground-muted text-body">An overview of your organization.</p>
       </div>
 
       {error && (
@@ -54,28 +54,28 @@ export function DashboardPage() {
       <div className="grid gap-4 sm:grid-cols-2">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Total Employees</CardTitle>
-            <Users className="text-muted-foreground h-4 w-4" />
+            <CardTitle className="text-card-title font-medium">Total Employees</CardTitle>
+            <Users className="text-foreground-muted h-4 w-4" />
           </CardHeader>
           <CardContent>
             {isLoading ? (
               <Skeleton className="h-8 w-16" />
             ) : (
-              <div className="text-3xl font-semibold">{employees?.length}</div>
+              <div className="text-metrics font-semibold">{employees?.length}</div>
             )}
           </CardContent>
         </Card>
 
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Total Departments</CardTitle>
-            <Building2 className="text-muted-foreground h-4 w-4" />
+            <CardTitle className="text-card-title font-medium">Total Departments</CardTitle>
+            <Building2 className="text-foreground-muted h-4 w-4" />
           </CardHeader>
           <CardContent>
             {isLoading ? (
               <Skeleton className="h-8 w-16" />
             ) : (
-              <div className="text-3xl font-semibold">{departments?.length}</div>
+              <div className="text-metrics font-semibold">{departments?.length}</div>
             )}
           </CardContent>
         </Card>
@@ -83,7 +83,7 @@ export function DashboardPage() {
 
       <Card>
         <CardHeader>
-          <CardTitle className="text-sm font-medium">Headcount by department</CardTitle>
+          <CardTitle className="text-card-title font-medium">Headcount by department</CardTitle>
         </CardHeader>
         <CardContent className="space-y-3">
           {isLoading && (
@@ -93,14 +93,14 @@ export function DashboardPage() {
             </>
           )}
           {!isLoading && headcountByDepartment?.length === 0 && (
-            <p className="text-muted-foreground text-sm">No departments yet.</p>
+            <p className="text-foreground-muted text-body">No departments yet.</p>
           )}
           {!isLoading &&
             headcountByDepartment?.map(({ department, count }) => (
               <div key={department.id} className="space-y-1">
                 <div className="flex items-center justify-between text-sm">
                   <span>{department.name}</span>
-                  <span className="text-muted-foreground">{count}</span>
+                  <span className="text-foreground-muted">{count}</span>
                 </div>
                 <div className="bg-muted h-2 w-full overflow-hidden rounded-full">
                   <div

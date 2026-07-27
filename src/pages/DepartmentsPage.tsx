@@ -93,8 +93,8 @@ export function DepartmentsPage() {
     <div className="space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Departments</h1>
-          <p className="text-muted-foreground text-sm">Manage your organization's departments.</p>
+          <h1 className="text-page-title font-semibold tracking-tight">Departments</h1>
+          <p className="text-foreground-muted text-body">Manage your organization's departments.</p>
         </div>
         {isAdmin && (
           <Button onClick={openCreateDialog}>
@@ -112,7 +112,7 @@ export function DepartmentsPage() {
       )}
 
       <div className="relative max-w-sm">
-        <Search className="text-muted-foreground absolute top-2.5 left-2.5 h-4 w-4" />
+        <Search className="text-foreground-muted absolute top-2.5 left-2.5 h-4 w-4" />
         <Input
           placeholder="Search departments..."
           className="pl-8"
@@ -150,7 +150,7 @@ export function DepartmentsPage() {
 
             {!isLoading && filtered?.length === 0 && (
               <TableRow>
-                <TableCell colSpan={isAdmin ? 4 : 3} className="text-muted-foreground h-24 text-center">
+                <TableCell colSpan={isAdmin ? 4 : 3} className="text-foreground-muted h-24 text-center">
                   {search ? 'No departments match your search.' : 'No departments yet.'}
                 </TableCell>
               </TableRow>
@@ -160,8 +160,8 @@ export function DepartmentsPage() {
               filtered?.map((department) => (
                 <TableRow key={department.id}>
                   <TableCell className="font-medium">{department.name}</TableCell>
-                  <TableCell className="text-muted-foreground">{department.description || '—'}</TableCell>
-                  <TableCell className="text-muted-foreground">
+                  <TableCell className="text-foreground-muted">{department.description || '—'}</TableCell>
+                  <TableCell className="text-foreground-muted">
                     {new Date(department.createdAt).toLocaleDateString()}
                   </TableCell>
                   {isAdmin && (

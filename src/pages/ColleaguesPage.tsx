@@ -33,8 +33,8 @@ export function ColleaguesPage() {
   return (
     <div className="space-y-6 p-6">
       <div>
-        <h1 className="text-2xl font-semibold tracking-tight">My Colleagues</h1>
-        <p className="text-muted-foreground text-sm">People in your department.</p>
+        <h1 className="text-page-title font-semibold tracking-tight">My Colleagues</h1>
+        <p className="text-foreground-muted text-body">People in your department.</p>
       </div>
 
       {error && (
@@ -47,9 +47,9 @@ export function ColleaguesPage() {
       {notLinked && (
         <Card>
           <CardContent className="flex flex-col items-center gap-3 py-12 text-center">
-            <UserX className="text-muted-foreground h-10 w-10" />
+            <UserX className="text-foreground-muted h-10 w-10" />
             <p className="font-medium">No employee record linked to your account</p>
-            <p className="text-muted-foreground max-w-sm text-sm">
+            <p className="text-foreground-muted max-w-sm text-body">
               Ask your administrator to add you as an employee using this account's email address.
             </p>
           </CardContent>
@@ -75,9 +75,9 @@ export function ColleaguesPage() {
       {!notLinked && !error && colleagues !== null && colleagues.length === 0 && (
         <Card>
           <CardContent className="flex flex-col items-center gap-3 py-12 text-center">
-            <Users className="text-muted-foreground h-10 w-10" />
+            <Users className="text-foreground-muted h-10 w-10" />
             <p className="font-medium">No colleagues yet</p>
-            <p className="text-muted-foreground max-w-sm text-sm">
+            <p className="text-foreground-muted max-w-sm text-body">
               There's no one else in your department right now.
             </p>
           </CardContent>
@@ -96,7 +96,7 @@ export function ColleaguesPage() {
                   <div className="font-medium">
                     {colleague.firstName} {colleague.lastName}
                   </div>
-                  <div className="text-muted-foreground text-sm">{colleague.jobTitle}</div>
+                  <div className="text-foreground-muted text-body">{colleague.jobTitle}</div>
                 </div>
               </CardContent>
             </Card>

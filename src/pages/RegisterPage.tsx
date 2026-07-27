@@ -36,8 +36,8 @@ export function RegisterPage() {
   return (
     <AuthLayout>
       <div className="mb-8 space-y-1">
-        <h1 className="text-2xl font-semibold tracking-tight">Create your account</h1>
-        <p className="text-muted-foreground text-sm">
+        <h1 className="text-section-title font-semibold tracking-tight">Create your account</h1>
+        <p className="text-foreground-muted text-body">
           You'll need to be added as an employee by your admin first
         </p>
       </div>
@@ -60,7 +60,7 @@ export function RegisterPage() {
             value={email}
             onChange={(event) => setEmail(event.target.value)}
           />
-          <p className="text-muted-foreground text-xs">
+          <p className="text-foreground-muted text-caption">
             Use the exact email your admin added you with.
           </p>
         </div>
@@ -76,7 +76,7 @@ export function RegisterPage() {
             value={password}
             onChange={(event) => setPassword(event.target.value)}
           />
-          <p className="text-muted-foreground text-xs">At least 8 characters.</p>
+          <p className="text-foreground-muted text-caption">At least 8 characters.</p>
         </div>
 
         <Button type="submit" className="w-full" disabled={isSubmitting}>
@@ -85,7 +85,7 @@ export function RegisterPage() {
         </Button>
       </form>
 
-      <p className="text-muted-foreground mt-6 text-center text-sm">
+      <p className="text-foreground-muted mt-6 text-center text-body">
         Already have an account?{' '}
         <Link to="/login" className="text-foreground font-medium underline-offset-4 hover:underline">
           Sign in

@@ -114,8 +114,8 @@ export function EmployeesPage() {
     <div className="space-y-6 p-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-semibold tracking-tight">Employees</h1>
-          <p className="text-muted-foreground text-sm">Manage your organization's staff records.</p>
+          <h1 className="text-page-title font-semibold tracking-tight">Employees</h1>
+          <p className="text-foreground-muted text-body">Manage your organization's staff records.</p>
         </div>
         {isAdmin && (
           <Button onClick={openCreateDialog} disabled={departments.length === 0}>
@@ -134,7 +134,7 @@ export function EmployeesPage() {
 
       <div className="flex flex-wrap items-center gap-2">
         <div className="relative max-w-sm flex-1">
-          <Search className="text-muted-foreground absolute top-2.5 left-2.5 h-4 w-4" />
+          <Search className="text-foreground-muted absolute top-2.5 left-2.5 h-4 w-4" />
           <Input
             placeholder="Search by name or email..."
             className="pl-8"
@@ -184,7 +184,7 @@ export function EmployeesPage() {
 
             {!isLoading && filtered?.length === 0 && (
               <TableRow>
-                <TableCell colSpan={isAdmin ? 7 : 6} className="text-muted-foreground h-24 text-center">
+                <TableCell colSpan={isAdmin ? 7 : 6} className="text-foreground-muted h-24 text-center">
                   {search || departmentFilter !== ALL_DEPARTMENTS
                     ? 'No employees match your filters.'
                     : 'No employees yet.'}
@@ -198,11 +198,11 @@ export function EmployeesPage() {
                   <TableCell className="font-medium">
                     {employee.firstName} {employee.lastName}
                   </TableCell>
-                  <TableCell className="text-muted-foreground">{employee.email}</TableCell>
+                  <TableCell className="text-foreground-muted">{employee.email}</TableCell>
                   <TableCell>{employee.jobTitle}</TableCell>
-                  <TableCell className="text-muted-foreground">{employee.departmentName ?? '—'}</TableCell>
+                  <TableCell className="text-foreground-muted">{employee.departmentName ?? '—'}</TableCell>
                   <TableCell>{currencyFormatter.format(employee.salary)}</TableCell>
-                  <TableCell className="text-muted-foreground">{formatHireDate(employee.hireDate)}</TableCell>
+                  <TableCell className="text-foreground-muted">{formatHireDate(employee.hireDate)}</TableCell>
                   {isAdmin && (
                     <TableCell>
                       <DropdownMenu>
