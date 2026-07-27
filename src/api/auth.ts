@@ -26,7 +26,6 @@ export async function logout(): Promise<void> {
   try {
     await apiRequest<void>('/api/auth/logout', { method: 'POST' })
   } catch {
-    // Best-effort server-side revocation; the local session is always cleared below.
   } finally {
     setSession(null)
   }
